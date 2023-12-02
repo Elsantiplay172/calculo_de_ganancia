@@ -1,6 +1,6 @@
 from datetime import datetime
 from fpdf import FPDF
-
+import qrcode
 
 
 print('rutina de asistencia del cole')
@@ -48,6 +48,7 @@ else:
 
 
 
+
 print('tiempo de fin')
 tiempo_defin = datetime.now()
 print(tiempo_defin)
@@ -75,13 +76,14 @@ pdf.text(y = 120, x = 15,txt = 'cuarto examen:  '+ str(examen4))
 pdf.text(y = 125, x= 0,txt = '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
 pdf.text(y = 130, x = 15,txt = 'notafinal:  '+ str(notafinal))
 pdf.text(y = 135, x= 0,txt = '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
-
+pdf.text(y = 140, x= 15,txt= 'recomendaciones'+ str(recomendaciones))
 pdf.text(y = 145, x= 0,txt = '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
 pdf.text(y= 150, x = 15, txt= str (comentario) )
 pdf.text(y = 155, x= 0,txt = '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
-
 pdf.text(y = 160, x = 15, txt= 'inscrito en la ley organica de educacion')
 pdf.image('bandera.png',y= 170, x= 150, w= 40,h = 40, link='http://apps.ucab.edu.ve/nap/recursos/LeyOrganicadeEducacion.pdf' )
+nota_nombre = nombredelestudiante+ str(notafinal)
+img = qrcode.make(nota_nombre)
+img.save('nota_nombre.png')
+pdf.image('nota_nombre.png',y=200, x= 35, w=40, h=40)
 pdf.output('reporte nota.pdf','f')
-
-
