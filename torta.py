@@ -1,5 +1,5 @@
 from fpdf import FPDF
-
+import qrcode
 
 nombre_del_cliente = input('nombre de cliente:  ')
 cedula_del_cliente = input('cedula de cliente:  ')
@@ -37,3 +37,22 @@ dolares = round(en_dolar)
 print('en dolares', dolares)
 sin_decimas = round(total)
 print('total entero',sin_decimas,'bs')
+
+pdf = FPDF(orientation='portrait',unit='mm',format= 'A4')
+pdf.add_page()
+pdf.set_font('ARIAL','B',16)
+
+pdf.text(y= 5, x= 15, txt= 'empresa ¨postresamalia')
+pdf.image('postresamalia.jpg',y= 10, x= 150, w= 40,h = 40, link= 'https://www.facebook.com/people/Postresamalia/100063545463998/')
+pdf.text(y= 20,x= 15,txt= 'nombre del cliente'+ str (nombre_del_cliente))
+pdf.text(y= 30,x= 15,txt= 'cedula del cliente'+ str (cedula_del_cliente))
+pdf.text(y = 35, x= 0,txt = '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
+pdf.text(y=40,x=15,txt= 'precio del dolar'+str(precio_de_material))
+pdf.text(y=50,x=15,txt= 'margen de ganancia'+str(margen_de_ganancia))
+pdf.text(y=60,x=15,txt= 'subtotal'+str(subtotal))
+pdf.text(y =65, x= 0,txt = '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
+pdf.text(y=70,x=15,txt= 'total'+str(total))
+pdf.text(y =75, x= 0,txt = '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
+pdf.text(y=80,x=15,txt= 'total'+str(total))
+pdf.text(y=70,x=15,txt= 'en dolares'+str(en_dolar))
+pdf.output('cauculo_de_ganancia.pdf')
